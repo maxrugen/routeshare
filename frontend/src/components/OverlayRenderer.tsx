@@ -1,9 +1,9 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Download, RefreshCw } from 'lucide-react'
-import { OverlayRendererProps, ActivityData, OverlayStyle } from '@/types'
+import { OverlayRendererProps, ActivityData, OverlayStyle } from '../../types'
 
 export function OverlayRenderer({ 
   activityData, 
@@ -78,15 +78,15 @@ export function OverlayRenderer({
 
       // Draw overlay content
       if (defaultStyle.showStats) {
-        drawActivityStats(ctx, activityData, defaultStyle)
+        drawActivityStats(ctx, canvas, activityData, defaultStyle)
       }
 
       if (defaultStyle.showMap && activityData.coordinates.length > 0) {
-        drawRouteMap(ctx, activityData.coordinates, defaultStyle)
+        drawRouteMap(ctx, canvas, activityData.coordinates, defaultStyle)
       }
 
       // Draw activity name
-      drawActivityName(ctx, activityData.name, defaultStyle)
+      drawActivityName(ctx, canvas, activityData.name, defaultStyle)
 
       // Convert to data URL
       const imageDataUrl = canvas.toDataURL('image/png')
@@ -99,7 +99,7 @@ export function OverlayRenderer({
     }
   }
 
-  const drawActivityStats = (ctx: CanvasRenderingContext2D, data: ActivityData, style: OverlayStyle) => {
+  const drawActivityStats = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, data: ActivityData, style: OverlayStyle) => {
     const stats = [
       { label: 'Distance', value: formatDistance(data.distance) },
       { label: 'Duration', value: formatDuration(data.duration) },
@@ -126,7 +126,7 @@ export function OverlayRenderer({
     })
   }
 
-  const drawRouteMap = (ctx: CanvasRenderingContext2D, coordinates: Array<{ lat: number; lng: number }>, style: OverlayStyle) => {
+  const drawRouteMap = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, coordinates: Array<{ lat: number; lng: number }>, style: OverlayStyle) => {
     if (coordinates.length < 2) return
 
     // Calculate bounds
@@ -182,7 +182,7 @@ export function OverlayRenderer({
     ctx.fill()
   }
 
-  const drawActivityName = (ctx: CanvasRenderingContext2D, name: string, style: OverlayStyle) => {
+  const drawActivityName = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, name: string, style: OverlayStyle) => {
     const maxWidth = canvas.width - 120
     const fontSize = Math.min(style.fontSize * 1.2, 72)
     

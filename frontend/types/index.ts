@@ -47,7 +47,7 @@ export interface StravaActivity {
 // Overlay generation types
 export interface OverlayRequest {
   activityData: ActivityData;
-  backgroundImage?: string;
+  backgroundImage?: string | null;
   overlayStyle: OverlayStyle;
 }
 
@@ -72,7 +72,7 @@ export interface FileUploadProps {
 
 export interface OverlayRendererProps {
   activityData: ActivityData;
-  backgroundImage?: string;
+  backgroundImage?: string | null;
   overlayStyle?: Partial<OverlayStyle>;
 }
 

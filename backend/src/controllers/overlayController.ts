@@ -21,55 +21,55 @@ export class OverlayController {
    * Generate Instagram Story overlay
    */
   generateOverlay = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-    const { activityData, backgroundImage, overlayStyle } = req.body as OverlayRequest;
+    const { activityData, backgroundImage, overlayStyle } = req.body;
 
-    // Generate overlay
-    const overlayBuffer = await this.overlayService.generateOverlay(
-      activityData,
-      backgroundImage,
-      overlayStyle
-    );
+    if (!activityData) {
+      throw ApiError.badRequest('Activity data is required');
+    }
 
-    // Set response headers for image download
-    res.setHeader('Content-Type', 'image/png');
-    res.setHeader('Content-Disposition', 'attachment; filename="instagram-story-overlay.png"');
-    res.setHeader('Content-Length', overlayBuffer.length.toString());
-
-    res.send(overlayBuffer);
-  });
-
-  /**
-   * Generate overlay with custom styling
-   */
-  generateCustomOverlay = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-    const { activityData, backgroundImage, customStyle } = req.body as CustomOverlayRequest;
-
-    // Merge custom style with defaults
-    const overlayStyle: OverlayStyle = {
-      primaryColor: '#1a1a1a',
-      secondaryColor: '#666666',
-      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-      fontSize: 48,
-        position: 'bottom',
-        showMap: true,
-        showStats: true,
-        ...customStyle
-      };
-
-      // Generate overlay
+    try {
       const overlayBuffer = await this.overlayService.generateOverlay(
         activityData,
-        backgroundImage,
+        backgroundImage || null,
         overlayStyle
       );
 
-      // Set response headers for image download
       res.setHeader('Content-Type', 'image/png');
-      res.setHeader('Content-Disposition', 'attachment; filename="custom-overlay.png"');
-      res.setHeader('Content-Length', overlayBuffer.length.toString());
-
+      res.setHeader('Content-Disposition', 'attachment; filename="routeshare-overlay.png"');
       res.send(overlayBuffer);
-    });
+    } catch (error) {
+      throw ApiError.internal(
+        `Failed to generate overlay: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
+    }
+  });
+
+  /**
+   * Generate custom Instagram Story overlay
+   */
+  generateCustomOverlay = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { activityData, backgroundImage, customStyle } = req.body;
+
+    if (!activityData) {
+      throw ApiError.badRequest('Activity data is required');
+    }
+
+    try {
+      const overlayBuffer = await this.overlayService.generateOverlay(
+        activityData,
+        backgroundImage || null,
+        customStyle
+      );
+
+      res.setHeader('Content-Type', 'image/png');
+      res.setHeader('Content-Disposition', 'attachment; filename="routeshare-custom-overlay.png"');
+      res.send(overlayBuffer);
+    } catch (error) {
+      throw ApiError.internal(
+        `Failed to generate custom overlay: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
+    }
+  });
 
   /**
    * Get available overlay templates
@@ -146,7 +146,7 @@ export class OverlayController {
     // Generate preview overlay
     const overlayBuffer = await this.overlayService.generateOverlay(
       activityData,
-      undefined, // No background image for preview
+      null, // No background image for preview
       templateStyle
     );
 

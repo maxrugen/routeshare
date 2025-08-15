@@ -1,16 +1,16 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import * as htmlToImage from 'html-to-image';
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
-import { StravaConnectButton } from '@/components/StravaConnectButton';
-import { FileUpload } from '@/components/FileUpload';
-import { useOverlayState } from '@/hooks/useOverlayState';
-import { Overlay } from '@/components/Overlay';
+import { StravaConnectButton } from '../../src/components/StravaConnectButton';
+import { FileUpload } from '../../src/components/FileUpload';
+import { useOverlayState } from '../../src/hooks/useOverlayState';
+import { Overlay } from '../../src/components/Overlay';
 import { Download } from 'lucide-react';
 
-export default function DashboardPage() {
+function DashboardContent() {
   const searchParams = useSearchParams();
   const isDemo = searchParams.get('demo') === 'true';
 
@@ -123,5 +123,13 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }

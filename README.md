@@ -1,17 +1,22 @@
 # Routeshare - Instagram Story Overlays for Activities
 
-A cross-platform MVP application that generates beautiful Instagram Story overlays from your Strava activities or GPX files. Create stunning visual representations of your fitness achievements with clean, minimal designs.
+A streamlined MVP application that generates beautiful Instagram Story overlays from your GPX files. Create stunning visual representations of your fitness achievements with clean, minimal designs. Next up: Strava integration to import activities directly!
 
 ## ✨ Features
 
 - **📱 Instagram Story Ready**: Outputs images in perfect 1080x1920 format
-- **🔗 Strava Integration**: Connect your Strava account via OAuth
-- **📁 GPX File Support**: Upload and parse GPX files for offline activities
-- **🎨 Custom Overlays**: Beautiful templates with customizable colors and positioning
-- **🗺️ Route Visualization**: Interactive route maps with start/end markers
+- **📁 GPX File Support**: Upload and parse GPX files with full coordinate processing
 - **📊 Activity Stats**: Display distance, duration, elevation, and pace
-- **🖼️ Background Images**: Upload custom background photos
-- **💾 Export Options**: Download as PNG for immediate use
+- **💾 Export Options**: Download as PNG with white/black color variants
+- **🔧 Type Safety**: Full TypeScript support with zero compilation errors
+- **⚡ Development Ready**: Hot reload, concurrent development servers, and optimized builds
+
+## ✅ Build Status
+
+- **Backend**: ✅ TypeScript compilation successful
+- **Frontend**: ✅ Next.js build successful  
+- **Development**: ✅ Hot reload working
+- **Type Safety**: ✅ All TypeScript errors resolved
 
 ## 🏗️ Architecture
 
@@ -64,21 +69,9 @@ This will start:
 - Backend: http://localhost:5001
 - Frontend: http://localhost:3000
 
-## 🔧 Configuration
+> **Note**: The project is now fully functional with all TypeScript compilation errors resolved. Both frontend and backend build successfully and are ready for development.
 
-### Strava API Setup
-
-1. Go to [Strava API Settings](https://www.strava.com/settings/api)
-2. Create a new application
-3. Copy your Client ID and Client Secret
-4. Set Redirect URI to: `http://localhost:3000/api/auth/strava/callback`
-5. Update your `.env` file:
-
-```env
-STRAVA_CLIENT_ID=your_client_id
-STRAVA_CLIENT_SECRET=your_client_secret
-REDIRECT_URI=http://localhost:3000/api/auth/strava/callback
-```
+## �� Configuration
 
 ### Environment Variables
 
@@ -86,11 +79,6 @@ REDIRECT_URI=http://localhost:3000/api/auth/strava/callback
 # Server Configuration
 PORT=5001
 NODE_ENV=development
-
-# Strava API Configuration
-STRAVA_CLIENT_ID=your_strava_client_id
-STRAVA_CLIENT_SECRET=your_strava_client_secret
-REDIRECT_URI=http://localhost:3000/api/auth/strava/callback
 
 # File Upload Configuration
 MAX_FILE_SIZE=10485760
@@ -101,28 +89,21 @@ UPLOAD_DIR=uploads
 
 ### 1. Import Activity Data
 
-**Option A: Strava Integration**
-- Click "Connect with Strava"
-- Authorize the application
-- Select an activity from your recent activities
-
-**Option B: GPX File Upload**
+**GPX File Upload**
 - Drag & drop a GPX file or click to browse
 - Supported formats: GPX (GPS Exchange Format)
 - Maximum file size: 10MB
 
-### 2. Customize Your Overlay
+### 2. Generate Your Overlay
 
-- **Style Options**: Choose primary/secondary colors
-- **Position**: Top, center, or bottom placement
-- **Elements**: Toggle map and stats display
-- **Background**: Upload custom background images
+- **Simple Process**: Upload GPX file and get instant overlay
+- **Activity Stats**: View distance, duration, elevation, and pace
+- **Clean Design**: Minimal, Instagram Story ready format
 
-### 3. Generate & Export
+### 3. Export & Share
 
-- Click "Generate Overlay" to create your design
-- Preview the result in real-time
-- Download as PNG file
+- Choose between white or black overlay variants
+- Download as PNG file in perfect 1080x1920 format
 - Share directly to Instagram Stories
 
 ## 🏃‍♂️ Demo Mode
@@ -145,13 +126,18 @@ routeshare/
 │   │   ├── controllers/    # Request handlers
 │   │   ├── services/       # Business logic
 │   │   ├── routes/         # API endpoints
-│   │   └── types/          # TypeScript definitions
+│   │   ├── types/          # TypeScript definitions
+│   │   ├── middleware/     # Express middleware
+│   │   └── utils/          # Utility functions
 │   ├── uploads/            # File upload directory
 │   └── package.json
 ├── frontend/               # Next.js 14 application
 │   ├── app/               # App Router pages
-│   ├── components/        # React components
-│   ├── types/            # TypeScript definitions
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   ├── hooks/         # Custom React hooks
+│   │   └── lib/           # Utility libraries
+│   ├── types/             # TypeScript definitions
 │   └── package.json
 └── package.json           # Root package.json
 ```
@@ -179,21 +165,36 @@ npm start               # Start production server
 
 ### API Endpoints
 
-#### Authentication
-- `GET /api/auth/strava` - Initiate Strava OAuth
-- `GET /api/auth/strava/callback` - OAuth callback handler
-- `GET /api/auth/profile` - Get user profile
-- `POST /api/auth/logout` - Logout user
-
 #### GPX Processing
 - `POST /api/gpx/upload` - Upload and parse GPX file
 - `GET /api/gpx/sample` - Get sample activity data
 
 #### Overlay Generation
 - `POST /api/overlay/generate` - Generate Instagram Story overlay
-- `POST /api/overlay/generate/custom` - Generate with custom styling
-- `GET /api/overlay/templates` - Get available templates
-- `POST /api/overlay/templates/:id/preview` - Preview template
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**TypeScript Compilation Errors**
+- ✅ All TypeScript errors have been resolved
+- ✅ Both frontend and backend build successfully
+- ✅ Path mapping issues fixed
+
+**Port Conflicts**
+- Backend runs on port 5001 (not 5000)
+- Frontend runs on port 3000
+- Update your `.env` file accordingly
+
+**Import Path Issues**
+- All component imports use relative paths
+- Type definitions are properly mapped
+- No more `@/types` import errors
+
+**Build Issues**
+- Backend: Use `npm run build` to compile TypeScript
+- Frontend: Use `npm run build` to build Next.js app
+- Both should complete without errors
 
 ## 🎨 Design System
 
@@ -223,13 +224,12 @@ npm start               # Start production server
 
 ## 🚧 Future Enhancements
 
-- [ ] **Template Library**: More overlay design options
+- [ ] **Strava Integration**: Connect your Strava account and import activities directly
+  - Need to explore: OAuth authentication flow, activity selection, GPX data extraction
 - [ ] **Social Sharing**: Direct Instagram integration
-- [ ] **Activity History**: Save and manage previous overlays
-- [ ] **Advanced Customization**: Fonts, layouts, animations
-- [ ] **Mobile App**: React Native version
-- [ ] **Analytics**: Track overlay usage and engagement
-- [ ] **Collaboration**: Share and remix overlay designs
+- [ ] **Admin Analytics**: Backend usage statistics and user activity tracking
+- [ ] **Mobile App**: React Native version (needs exploration)
+- [ ] **Batch Processing**: Generate multiple overlays at once (needs exploration)
 
 ## 🤝 Contributing
 

@@ -3,8 +3,8 @@
 import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, File, Loader2, CheckCircle } from 'lucide-react';
-import { FileUploadProps } from '@/types';
-import { api } from '@/lib/apiClient';
+import { FileUploadProps } from '../../types';
+import { api } from '../lib/apiClient';
 
 export function FileUpload({ onDataLoaded }: FileUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
@@ -20,7 +20,7 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
     setError(null);
 
     try {
-      const response = await api.gpx.upload(file);
+      const response = await api.gpx.uploadFile(file);
       onDataLoaded(response.activityData);
       setUploadSuccess(true);
     } catch (err) {

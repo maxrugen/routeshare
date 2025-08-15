@@ -1,6 +1,7 @@
-// frontend/src/components/Overlay.tsx
+'use client'
+
 import React from 'react';
-import { ActivityData, OverlayStyle, Coordinate } from '@/types';
+import { ActivityData, OverlayStyle, Coordinate } from '../../types';
 
 // Hilfsfunktionen (getMapPath, formatDuration) bleiben hier unverändert...
 const getMapPath = (coordinates: Coordinate[], viewBoxWidth: number, viewBoxHeight: number): string => {

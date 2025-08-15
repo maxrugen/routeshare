@@ -141,21 +141,20 @@ export class GPXService {
   }
 
   /**
-   * Calculate duration from timestamps
+   * Calculate duration from timestamps if available
    */
-  private calculateDuration(points: Array<{ timestamp?: string }>): number {
-    const firstPoint = points.find(p => p.timestamp);
-    const lastPoint = points.findLast(p => p.timestamp);
+  private calculateDuration(points: Array<{ lat: number; lon: number; elevation?: number; time?: string }>): number {
+    if (points.length < 2) return 0;
     
-    if (!firstPoint?.timestamp || !lastPoint?.timestamp) {
-      // If no timestamps, estimate based on average speed
-      return 3600; // Default to 1 hour
-    }
+    const firstPoint = points.find(p => p.time);
+    const lastPoint = points.findLast(p => p.time);
     
-    const startTime = new Date(firstPoint.timestamp).getTime();
-    const endTime = new Date(lastPoint.timestamp).getTime();
+    if (!firstPoint?.time || !lastPoint?.time) return 0;
     
-    return (endTime - startTime) / 1000; // Convert to seconds
+    const startTime = new Date(firstPoint.time).getTime();
+    const endTime = new Date(lastPoint.time).getTime();
+    
+    return Math.max(0, Math.round((endTime - startTime) / 1000));
   }
 
   /**

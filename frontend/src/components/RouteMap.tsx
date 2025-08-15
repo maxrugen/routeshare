@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Navigation } from 'lucide-react'
-import { RouteMapProps } from '@/types'
+import { RouteMapProps } from '../../types'
 
 export function RouteMap({ coordinates }: RouteMapProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)

@@ -115,7 +115,7 @@ export const overlayApi = {
   // Generate overlay
   generate: async (data: {
     activityData: any;
-    backgroundImage?: string;
+    backgroundImage?: string | null;
     overlayStyle?: any;
   }): Promise<Blob> => {
     return apiRequest('/api/overlay/generate', {
@@ -127,7 +127,7 @@ export const overlayApi = {
   // Generate custom overlay
   generateCustom: async (data: {
     activityData: any;
-    backgroundImage?: string;
+    backgroundImage?: string | null;
     customStyle?: any;
   }): Promise<Blob> => {
     return apiRequest('/api/overlay/generate/custom', {

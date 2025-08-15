@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
-import { ActivityData } from '@/types';
-import { api } from '@/lib/apiClient';
+import { ActivityData } from '../../types';
+import { api } from '../lib/apiClient';
 
 // Overlay style interface
 interface OverlayStyle {

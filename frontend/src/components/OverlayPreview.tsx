@@ -1,8 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Download, Share2, Instagram } from 'lucide-react'
-import { OverlayPreviewProps } from '@/types'
+import { OverlayPreviewProps } from '../../types'
 
 export function OverlayPreview({ overlayUrl }: OverlayPreviewProps) {
   const handleDownload = () => {

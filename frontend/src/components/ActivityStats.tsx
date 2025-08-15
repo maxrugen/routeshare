@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { MapPin, Clock, TrendingUp, Zap } from 'lucide-react'
-import { ActivityStatsProps } from '@/types'
+import { ActivityStatsProps } from '../../types'
 
 export function ActivityStats({ activityData }: ActivityStatsProps) {
   const formatDistance = (distance: number) => {

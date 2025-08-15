@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Activity, Loader2 } from 'lucide-react'
-import { StravaConnectButtonProps } from '@/types'
-import { api } from '@/lib/apiClient'
+import { StravaConnectButtonProps } from '../../types'
+import { api } from '../lib/apiClient'
 
 export function StravaConnectButton({ onDataLoaded }: StravaConnectButtonProps) {
   const [isConnecting, setIsConnecting] = useState(false)

@@ -75,3 +75,10 @@ export interface GPXData {
     }>;
   }>;
 }
+
+// Session types for Express
+declare module 'express-session' {
+  interface SessionData {
+    stravaToken?: StravaToken;
+  }
+}

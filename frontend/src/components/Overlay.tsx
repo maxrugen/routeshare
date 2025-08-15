@@ -73,7 +73,7 @@ export const Overlay = React.forwardRef<HTMLDivElement, OverlayProps>(
           {overlayStyle.showStats && (
             <div className="w-full text-center" style={{ display: 'flex', justifyContent: 'space-between', borderTop: `4px solid ${overlayStyle.secondaryColor}`, paddingTop: '32px' }}>
               <div style={{ flex: 1 }}>
-                <p style={{ fontSize: '96px', fontWeight: 'bold', lineHeight: 1 }}>{(activityData.distance / 1000).toFixed(2)}</p>
+                <p style={{ fontSize: '96px', fontWeight: 'bold', lineHeight: 1 }}>{(activityData.distance / 1000).toFixed(1)}</p>
                 <p style={{ fontSize: '36px', color: overlayStyle.secondaryColor, marginTop: '8px' }}>Kilometers</p>
               </div>
               <div style={{ flex: 1 }}>

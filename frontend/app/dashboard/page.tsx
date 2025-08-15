@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, Suspense } from 'react';
 import * as htmlToImage from 'html-to-image';
 import { motion } from 'framer-motion';
-import { useSearchParams } from 'next/navigation';
 import { StravaConnectButton } from '../../src/components/StravaConnectButton';
 import { FileUpload } from '../../src/components/FileUpload';
 import { useOverlayState } from '../../src/hooks/useOverlayState';
@@ -11,24 +10,16 @@ import { Overlay } from '../../src/components/Overlay';
 import { Download } from 'lucide-react';
 
 function DashboardContent() {
-  const searchParams = useSearchParams();
-  const isDemo = searchParams.get('demo') === 'true';
-
   const {
-    activityData, overlayStyle, error, isLoading,
-    setActivityData, updateOverlayStyle, loadDemoData, clearError,
+    activityData, overlayStyle, error,
+    setActivityData, updateOverlayStyle, clearError,
   } = useOverlayState();
 
   const overlayRef = useRef<HTMLDivElement>(null);
   // Neuer State, um den Ladezustand pro Button zu steuern
   const [exportingColor, setExportingColor] = useState<'white' | 'black' | null>(null);
 
-
-  useEffect(() => {
-    if (isDemo && !activityData) {
-      loadDemoData();
-    }
-  }, [isDemo, activityData, loadDemoData]);
+  
   
   const handleExport = (color: 'white' | 'black') => {
     if (overlayRef.current === null) return;

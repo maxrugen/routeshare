@@ -106,14 +106,7 @@ UPLOAD_DIR=uploads
 - Download as PNG file in perfect 1080x1920 format
 - Share directly to Instagram Stories
 
-## 🏃‍♂️ Demo Mode
-
-Try the app without real data by visiting:
-```
-http://localhost:3000/dashboard?demo=true
-```
-
-This loads sample activity data so you can explore all features immediately.
+<!-- Demo mode removed -->
 
 ## 🛠️ Development
 
@@ -167,7 +160,7 @@ npm start               # Start production server
 
 #### GPX Processing
 - `POST /api/gpx/upload` - Upload and parse GPX file
-- `GET /api/gpx/sample` - Get sample activity data
+<!-- Sample endpoint removed -->
 
 #### Overlay Generation
 - `POST /api/overlay/generate` - Generate Instagram Story overlay

@@ -32,7 +32,6 @@ interface OverlayActions {
   generateOverlay: () => Promise<void>;
   resetState: () => void;
   clearError: () => void;
-  loadDemoData: () => Promise<void>;
 }
 
 // Default overlay style
@@ -140,22 +139,7 @@ export function useOverlayState(): OverlayState & OverlayActions {
     setError(null);
   }, []);
 
-  // Load demo data
-  const loadDemoData = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const response = await api.gpx.getSample();
-      setActivityDataState(response.activityData);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to load demo data';
-      setError(errorMessage);
-      console.error('Failed to load demo data:', err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  // (Demo removed)
 
   // Memoized actions object
   const actions = useMemo<OverlayActions>(() => ({
@@ -165,7 +149,6 @@ export function useOverlayState(): OverlayState & OverlayActions {
     generateOverlay,
     resetState,
     clearError,
-    loadDemoData,
   }), [
     setActivityData,
     setBackgroundImage,
@@ -173,7 +156,6 @@ export function useOverlayState(): OverlayState & OverlayActions {
     generateOverlay,
     resetState,
     clearError,
-    loadDemoData,
   ]);
 
   return {

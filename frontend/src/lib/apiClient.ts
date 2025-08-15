@@ -104,10 +104,7 @@ export const gpxApi = {
     return response.json();
   },
 
-  // Get sample GPX data
-  getSample: async (): Promise<{ activityData: any }> => {
-    return apiRequest('/api/gpx/sample');
-  },
+  // (Sample endpoint removed)
 };
 
 // Overlay API functions

@@ -12,13 +12,8 @@ async function testBackend() {
     const healthResponse = await axios.get(`${BASE_URL}/health`);
     console.log('✅ Health check passed:', healthResponse.data);
 
-    // Test sample GPX endpoint
-    console.log('\n2. Testing sample GPX endpoint...');
-    const sampleResponse = await axios.get(`${BASE_URL}/api/gpx/sample`);
-    console.log('✅ Sample GPX endpoint passed:', sampleResponse.data.success);
-
     // Test overlay templates endpoint
-    console.log('\n3. Testing overlay templates endpoint...');
+    console.log('\n2. Testing overlay templates endpoint...');
     const templatesResponse = await axios.get(`${BASE_URL}/api/overlay/templates`);
     console.log('✅ Templates endpoint passed:', templatesResponse.data.templates.length, 'templates found');
 

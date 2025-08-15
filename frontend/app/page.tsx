@@ -41,9 +41,6 @@ export default function HomePage() {
                 Get Started
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link href="/dashboard?demo=true" className="btn-secondary">
-                Try Demo
-              </Link>
             </motion.div>
           </div>
         </div>

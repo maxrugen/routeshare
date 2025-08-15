@@ -104,33 +104,5 @@ export class GPXController {
     });
   });
 
-  /**
-   * Get sample GPX data for testing
-   */
-  getSampleGPX = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-    // Return sample activity data for testing
-    const sampleData: ActivityData = {
-      id: 'sample_123',
-      name: 'Sample Morning Run',
-      distance: 5000, // 5km
-      duration: 1800, // 30 minutes
-      elevation: 45,
-      pace: 216, // 3:36/km
-      coordinates: [
-        { lat: 37.7749, lng: -122.4194 },
-        { lat: 37.7750, lng: -122.4195 },
-        { lat: 37.7751, lng: -122.4196 },
-        { lat: 37.7752, lng: -122.4197 },
-        { lat: 37.7753, lng: -122.4198 }
-      ],
-      startTime: new Date().toISOString(),
-      type: 'Run'
-    };
-
-    res.json({
-      success: true,
-      message: 'Sample GPX data',
-      activityData: sampleData
-    });
-  });
+  // (Sample endpoint removed)
 }

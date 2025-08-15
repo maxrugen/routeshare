@@ -1,7 +1,7 @@
 {
-  "name": "routeshot-backend",
+  "name": "routeshare-backend",
   "version": "1.0.0",
-  "description": "Backend API for Routeshot app",
+  "description": "Backend API for Routeshare app",
   "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",

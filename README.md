@@ -1,4 +1,4 @@
-# Routeshot - Instagram Story Overlays for Activities
+# Routeshare - Instagram Story Overlays for Activities
 
 A cross-platform MVP application that generates beautiful Instagram Story overlays from your Strava activities or GPX files. Create stunning visual representations of your fitness achievements with clean, minimal designs.
 
@@ -33,8 +33,8 @@ A cross-platform MVP application that generates beautiful Instagram Story overla
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd routeshot
+   git clone https://github.com/maxrugen/routeshare
+   cd routeshare
    ```
 
 2. **Install dependencies**
@@ -139,7 +139,7 @@ This loads sample activity data so you can explore all features immediately.
 ### Project Structure
 
 ```
-routeshot/
+routeshare/
 ├── backend/                 # Node.js + Express API
 │   ├── src/
 │   │   ├── controllers/    # Request handlers
@@ -253,9 +253,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/routeshot/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/routeshot/discussions)
-- **Email**: support@routeshot.com
+- **Issues**: [GitHub Issues](https://github.com/maxrugen/routeshare/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/maxrugen/routeshare/discussions)
+- **Email**: support@routeshare.com
 
 ---
 

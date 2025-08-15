@@ -98,7 +98,7 @@ export default function DashboardPage() {
 
     const link = document.createElement('a')
     link.href = generatedOverlay
-    link.download = `routeshot-overlay-${Date.now()}.png`
+    link.download = `routeshare-overlay-${Date.now()}.png`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)

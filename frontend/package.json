@@ -1,7 +1,7 @@
 {
-  "name": "routeshot-frontend",
+  "name": "routeshare-frontend",
   "version": "1.0.0",
-  "description": "Frontend for Routeshot app",
+  "description": "Frontend for Routeshare app",
   "private": true,
   "scripts": {
     "dev": "next dev",

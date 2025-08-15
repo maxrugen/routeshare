@@ -8,7 +8,7 @@ export function OverlayPreview({ overlayUrl }: OverlayPreviewProps) {
   const handleDownload = () => {
     const link = document.createElement('a')
     link.href = overlayUrl
-    link.download = `routeshot-overlay-${Date.now()}.png`
+    link.download = `routeshare-overlay-${Date.now()}.png`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -19,7 +19,7 @@ export function OverlayPreview({ overlayUrl }: OverlayPreviewProps) {
       try {
         await navigator.share({
           title: 'My Activity Overlay',
-          text: 'Check out this Instagram Story overlay I created with Routeshot!',
+          text: 'Check out this Instagram Story overlay I created with Routeshare!',
           url: window.location.href,
         })
       } catch (error) {

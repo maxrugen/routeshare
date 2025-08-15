@@ -1,5 +1,5 @@
 {
-  "name": "routeshot",
+  "name": "routeshare",
   "version": "1.0.0",
   "description": "Cross-platform MVP app for generating Instagram Story overlays from activity data",
   "main": "index.js",

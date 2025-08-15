@@ -20,8 +20,9 @@ export class StravaService {
       client_id: this.clientId,
       response_type: 'code',
       redirect_uri: this.redirectUri,
-      approval_prompt: 'force',
-      scope: 'activity:read_all'
+      approval_prompt: 'auto',
+      // Request minimal scope + activity:read_all; expand later if needed
+      scope: 'read,activity:read_all'
     });
 
     return `${this.authUrl}/authorize?${params.toString()}`;

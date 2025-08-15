@@ -59,7 +59,7 @@ export const Overlay = React.forwardRef<HTMLDivElement, OverlayProps>(
       <div
         ref={ref}
         id="overlay-export"
-        className="w-[1080px] h-[1920px] p-20 flex flex-col"
+        className="w-[1080px] p-20 flex flex-col"
         style={containerStyle}
       >
         <div className="w-full">

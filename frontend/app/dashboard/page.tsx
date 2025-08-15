@@ -35,7 +35,11 @@ function DashboardContent() {
 
     // Kurze Verzögerung, um React Zeit zum Re-Rendern der Overlay-Komponente mit der neuen Farbe zu geben
     setTimeout(() => {
-      htmlToImage.toPng(overlayRef.current!, { cacheBust: true, pixelRatio: 1, width: 1080, height: 1920 })
+      const node = overlayRef.current!;
+      const rect = node.getBoundingClientRect();
+      const width = Math.round(rect.width || 1080);
+      const height = Math.round((node as HTMLDivElement).scrollHeight || rect.height || 1920);
+      htmlToImage.toPng(node, { cacheBust: true, pixelRatio: 1, width, height, backgroundColor: 'transparent' })
         .then((dataUrl) => {
           const link = document.createElement('a');
           link.download = `routeshare-overlay-${color}-${Date.now()}.png`;

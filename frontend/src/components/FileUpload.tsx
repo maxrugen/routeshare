@@ -43,7 +43,6 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
     <div className="text-center">
       <div
         {...getRootProps()}
-        // The ONLY change is here: py-6 was increased to py-10 for more vertical space.
         className={`relative border-2 border-dashed rounded-lg cursor-pointer transition-colors duration-200 
                     ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-primary-300 hover:border-blue-400'}
                     px-6 py-10`}
@@ -64,11 +63,11 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
             </>
           ) : (
             <>
-              <Upload className="w-8 h-8 mb-3" />
-              <p className="font-semibold">
+              <Upload className="w-8 h-8 mt-6 mb-4" />
+              <p className="font-semibold mb-2">
                 {isDragActive ? 'Drop the GPX file here' : 'Drag & drop a GPX file, or click to select'}
               </p>
-              <p className="text-sm">Supports GPX files up to 10MB</p>
+              <p className="text-sm mb-2">Supports GPX files up to 10MB</p>
             </>
           )}
         </div>
@@ -77,7 +76,7 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
       {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
 
       {!error && !uploadSuccess && (
-          <ul className="mt-4 text-xs text-left text-primary-500 list-disc list-inside space-y-1">
+          <ul className="mt-4 mb-4 text-xs text-left text-primary-500 list-disc list-inside space-y-1">
               <li>Supported format: GPX (GPS Exchange Format)</li>
               <li>Maximum file size: 10MB</li>
               <li>File should contain track data with coordinates</li>

@@ -1,96 +1,54 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useSearchParams } from 'next/navigation'
-import { ActivityData } from '@/types'
 import { StravaConnectButton } from '@/components/StravaConnectButton'
 import { FileUpload } from '@/components/FileUpload'
 import { OverlayRenderer } from '@/components/OverlayRenderer'
 import { OverlayPreview } from '@/components/OverlayPreview'
 import { ActivityStats } from '@/components/ActivityStats'
 import { RouteMap } from '@/components/RouteMap'
+import { useOverlayState } from '@/hooks/useOverlayState'
 
 export default function DashboardPage() {
   const searchParams = useSearchParams()
   const isDemo = searchParams.get('demo') === 'true'
   
-  const [activityData, setActivityData] = useState<ActivityData | null>(null)
-  const [backgroundImage, setBackgroundImage] = useState<string | null>(null)
-  const [overlayStyle, setOverlayStyle] = useState({
-    primaryColor: '#1a1a1a',
-    secondaryColor: '#666666',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    fontSize: 48,
-    position: 'bottom' as const,
-    showMap: true,
-    showStats: true,
-  })
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [generatedOverlay, setGeneratedOverlay] = useState<string | null>(null)
+  // Use the custom hook for all state management
+  const {
+    activityData,
+    backgroundImage,
+    overlayStyle,
+    isGenerating,
+    generatedOverlay,
+    error,
+    isLoading,
+    setActivityData,
+    setBackgroundImage,
+    updateOverlayStyle,
+    generateOverlay,
+    loadDemoData,
+    clearError,
+  } = useOverlayState()
 
   // Load demo data if demo mode
   useEffect(() => {
     if (isDemo && !activityData) {
       loadDemoData()
     }
-  }, [isDemo, activityData])
+  }, [isDemo, activityData, loadDemoData])
 
-  const loadDemoData = async () => {
-    try {
-      const response = await fetch('/api/gpx/sample')
-      const data = await response.json()
-      setActivityData(data.activityData)
-    } catch (error) {
-      console.error('Failed to load demo data:', error)
-    }
-  }
-
-  const handleActivityDataLoaded = (data: ActivityData) => {
+  const handleActivityDataLoaded = (data: any) => {
     setActivityData(data)
-    setGeneratedOverlay(null) // Reset overlay when new data is loaded
   }
 
   const handleBackgroundImageUpload = (imageUrl: string) => {
     setBackgroundImage(imageUrl)
-    setGeneratedOverlay(null) // Reset overlay when background changes
   }
 
   const handleStyleChange = (newStyle: Partial<typeof overlayStyle>) => {
-    setOverlayStyle(prev => ({ ...prev, ...newStyle }))
-    setGeneratedOverlay(null) // Reset overlay when style changes
-  }
-
-  const handleGenerateOverlay = async () => {
-    if (!activityData) return
-
-    setIsGenerating(true)
-    try {
-      const response = await fetch('/api/overlay/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          activityData,
-          backgroundImage,
-          overlayStyle,
-        }),
-      })
-
-      if (response.ok) {
-        const blob = await response.blob()
-        const imageUrl = URL.createObjectURL(blob)
-        setGeneratedOverlay(imageUrl)
-      } else {
-        throw new Error('Failed to generate overlay')
-      }
-    } catch (error) {
-      console.error('Error generating overlay:', error)
-      alert('Failed to generate overlay. Please try again.')
-    } finally {
-      setIsGenerating(false)
-    }
+    updateOverlayStyle(newStyle)
   }
 
   const handleDownloadOverlay = () => {
@@ -204,10 +162,29 @@ export default function DashboardPage() {
               )}
             </div>
 
+            {/* Error Display */}
+            {error && (
+              <motion.div
+                className="bg-red-50 border border-red-200 rounded-lg p-4"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-red-700">{error}</p>
+                  <button
+                    onClick={clearError}
+                    className="text-red-500 hover:text-red-700 text-sm font-medium"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
             {/* Generate Button */}
             {activityData && (
               <motion.button
-                onClick={handleGenerateOverlay}
+                onClick={generateOverlay}
                 disabled={isGenerating}
                 className="btn-primary w-full py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 initial={{ opacity: 0, y: 20 }}

@@ -5,9 +5,9 @@ const router = express.Router();
 const gpxController = new GPXController();
 
 // GPX file upload and parsing
-router.post('/upload', (req, res) => gpxController.uploadGPX(req, res));
+router.post('/upload', gpxController.uploadGPX);
 
 // Get sample GPX data for testing
-router.get('/sample', (req, res) => gpxController.getSampleGPX(req, res));
+router.get('/sample', gpxController.getSampleGPX);
 
 export default router;

@@ -4,7 +4,8 @@ import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { useDropzone } from 'react-dropzone'
 import { Upload, File, Loader2, CheckCircle } from 'lucide-react'
-import { ActivityData, FileUploadProps } from '@/types'
+import { FileUploadProps } from '@/types'
+import { api } from '@/lib/apiClient'
 
 export function FileUpload({ onDataLoaded }: FileUploadProps) {
   const [isUploading, setIsUploading] = useState(false)
@@ -20,30 +21,18 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
     setErrorMessage('')
 
     try {
-      const formData = new FormData()
-      formData.append('gpxFile', file)
-
-      const response = await fetch('/api/gpx/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        onDataLoaded(data.activityData)
-        setUploadStatus('success')
-        
-        // Reset status after 3 seconds
-        setTimeout(() => {
-          setUploadStatus('idle')
-        }, 3000)
-      } else {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to upload file')
-      }
+      const data = await api.gpx.uploadFile(file)
+      onDataLoaded(data.activityData)
+      setUploadStatus('success')
+      
+      // Reset status after 3 seconds
+      setTimeout(() => {
+        setUploadStatus('idle')
+      }, 3000)
     } catch (error) {
       console.error('Upload error:', error)
-      setErrorMessage(error instanceof Error ? error.message : 'Upload failed')
+      const errorMessage = error instanceof Error ? error.message : 'Upload failed'
+      setErrorMessage(errorMessage)
       setUploadStatus('error')
     } finally {
       setIsUploading(false)

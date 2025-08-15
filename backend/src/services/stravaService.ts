@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { StravaToken, StravaActivity, ActivityData } from '../types';
+import { StravaToken, StravaActivity } from '../types';
+import { ActivityData } from '../schemas/overlaySchema';
 
 export class StravaService {
   private baseUrl = 'https://www.strava.com/api/v3';

@@ -8,6 +8,9 @@ import authRoutes from './routes/authRoutes';
 import gpxRoutes from './routes/gpxRoutes';
 import overlayRoutes from './routes/overlayRoutes';
 
+// Import middleware
+import { errorHandler } from './middleware/errorHandler';
+
 // Load environment variables
 dotenv.config();
 
@@ -44,20 +47,18 @@ app.use('/api/auth', authRoutes);
 app.use('/api/gpx', gpxRoutes);
 app.use('/api/overlay', overlayRoutes);
 
-// Error handling middleware
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error('Error:', err);
-  
-  if (err.type === 'entity.too.large') {
-    res.status(413).json({ error: 'Request entity too large' });
-  } else {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
 // 404 handler
 app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+  res.status(404).json({ 
+    success: false,
+    message: 'Route not found',
+    statusCode: 404,
+    timestamp: new Date().toISOString(),
+    path: req.path
+  });
 });
+
+// Error handling middleware (must be last)
+app.use(errorHandler);
 
 export default app;

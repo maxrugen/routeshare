@@ -1,10 +1,12 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs';
 import { GPXService } from '../services/gpxService';
-import { ActivityData } from '../types';
+import { asyncHandler } from '../middleware/errorHandler';
+import { ApiError } from '../utils/ApiError';
+import { ActivityData } from '../schemas/overlaySchema';
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -53,25 +55,25 @@ export class GPXController {
   /**
    * Upload and parse GPX file
    */
-  async uploadGPX(req: Request, res: Response): Promise<void> {
-    try {
-      // Use multer middleware
+  uploadGPX = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    // Use multer middleware with promise-based approach
+    await new Promise<void>((resolve, reject) => {
       upload.single('gpxFile')(req, res, async (err) => {
         if (err) {
           if (err instanceof multer.MulterError) {
             if (err.code === 'LIMIT_FILE_SIZE') {
-              res.status(400).json({ error: 'File too large. Maximum size is 10MB.' });
+              reject(ApiError.badRequest('File too large. Maximum size is 10MB.'));
             } else {
-              res.status(400).json({ error: `Upload error: ${err.message}` });
+              reject(ApiError.badRequest(`Upload error: ${err.message}`));
             }
           } else {
-            res.status(400).json({ error: err.message });
+            reject(ApiError.badRequest(err.message));
           }
           return;
         }
 
         if (!req.file) {
-          res.status(400).json({ error: 'No file uploaded' });
+          reject(ApiError.badRequest('No file uploaded'));
           return;
         }
 
@@ -83,56 +85,52 @@ export class GPXController {
           fs.unlinkSync(req.file.path);
 
           res.json({
+            success: true,
             message: 'GPX file parsed successfully',
             activityData
           });
+          resolve();
         } catch (parseError) {
           // Clean up uploaded file on error
           if (req.file && fs.existsSync(req.file.path)) {
             fs.unlinkSync(req.file.path);
           }
           
-          res.status(400).json({ 
-            error: 'Failed to parse GPX file',
-            details: parseError instanceof Error ? parseError.message : 'Unknown error'
-          });
+          reject(ApiError.badRequest(
+            `Failed to parse GPX file: ${parseError instanceof Error ? parseError.message : 'Unknown error'}`
+          ));
         }
       });
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  }
+    });
+  });
 
   /**
    * Get sample GPX data for testing
    */
-  async getSampleGPX(req: Request, res: Response): Promise<void> {
-    try {
-      // Return sample activity data for testing
-      const sampleData: ActivityData = {
-        id: 'sample_123',
-        name: 'Sample Morning Run',
-        distance: 5000, // 5km
-        duration: 1800, // 30 minutes
-        elevation: 45,
-        pace: 216, // 3:36/km
-        coordinates: [
-          { lat: 37.7749, lng: -122.4194 },
-          { lat: 37.7750, lng: -122.4195 },
-          { lat: 37.7751, lng: -122.4196 },
-          { lat: 37.7752, lng: -122.4197 },
-          { lat: 37.7753, lng: -122.4198 }
-        ],
-        startTime: new Date().toISOString(),
-        type: 'Run'
-      };
+  getSampleGPX = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    // Return sample activity data for testing
+    const sampleData: ActivityData = {
+      id: 'sample_123',
+      name: 'Sample Morning Run',
+      distance: 5000, // 5km
+      duration: 1800, // 30 minutes
+      elevation: 45,
+      pace: 216, // 3:36/km
+      coordinates: [
+        { lat: 37.7749, lng: -122.4194 },
+        { lat: 37.7750, lng: -122.4195 },
+        { lat: 37.7751, lng: -122.4196 },
+        { lat: 37.7752, lng: -122.4197 },
+        { lat: 37.7753, lng: -122.4198 }
+      ],
+      startTime: new Date().toISOString(),
+      type: 'Run'
+    };
 
-      res.json({
-        message: 'Sample GPX data',
-        activityData: sampleData
-      });
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to get sample data' });
-    }
-  }
+    res.json({
+      success: true,
+      message: 'Sample GPX data',
+      activityData: sampleData
+    });
+  });
 }

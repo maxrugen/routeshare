@@ -1,6 +1,14 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { OverlayService } from '../services/overlayService';
-import { ActivityData, OverlayStyle } from '../types';
+import { asyncHandler } from '../middleware/errorHandler';
+import { ApiError } from '../utils/ApiError';
+import { 
+  OverlayRequest, 
+  CustomOverlayRequest, 
+  TemplatePreviewRequest,
+  OverlayStyle,
+  ActivityData 
+} from '../schemas/overlaySchema';
 
 export class OverlayController {
   private overlayService: OverlayService;
@@ -12,64 +20,36 @@ export class OverlayController {
   /**
    * Generate Instagram Story overlay
    */
-  async generateOverlay(req: Request, res: Response): Promise<void> {
-    try {
-      const { activityData, backgroundImage, overlayStyle } = req.body;
+  generateOverlay = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { activityData, backgroundImage, overlayStyle } = req.body as OverlayRequest;
 
-      if (!activityData) {
-        res.status(400).json({ error: 'Activity data is required' });
-        return;
-      }
+    // Generate overlay
+    const overlayBuffer = await this.overlayService.generateOverlay(
+      activityData,
+      backgroundImage,
+      overlayStyle
+    );
 
-      // Validate activity data
-      if (!this.validateActivityData(activityData)) {
-        res.status(400).json({ error: 'Invalid activity data format' });
-        return;
-      }
+    // Set response headers for image download
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Content-Disposition', 'attachment; filename="instagram-story-overlay.png"');
+    res.setHeader('Content-Length', overlayBuffer.length.toString());
 
-      // Generate overlay
-      const overlayBuffer = await this.overlayService.generateOverlay(
-        activityData,
-        backgroundImage,
-        overlayStyle
-      );
-
-      // Set response headers for image download
-      res.setHeader('Content-Type', 'image/png');
-      res.setHeader('Content-Disposition', 'attachment; filename="instagram-story-overlay.png"');
-      res.setHeader('Content-Length', overlayBuffer.length.toString());
-
-      res.send(overlayBuffer);
-    } catch (error) {
-      console.error('Overlay generation error:', error);
-      res.status(500).json({ error: 'Failed to generate overlay' });
-    }
-  }
+    res.send(overlayBuffer);
+  });
 
   /**
    * Generate overlay with custom styling
    */
-  async generateCustomOverlay(req: Request, res: Response): Promise<void> {
-    try {
-      const { activityData, backgroundImage, customStyle } = req.body;
+  generateCustomOverlay = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { activityData, backgroundImage, customStyle } = req.body as CustomOverlayRequest;
 
-      if (!activityData) {
-        res.status(400).json({ error: 'Activity data is required' });
-        return;
-      }
-
-      // Validate activity data
-      if (!this.validateActivityData(activityData)) {
-        res.status(400).json({ error: 'Invalid activity data format' });
-        return;
-      }
-
-      // Merge custom style with defaults
-      const overlayStyle: OverlayStyle = {
-        primaryColor: '#1a1a1a',
-        secondaryColor: '#666666',
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        fontSize: 48,
+    // Merge custom style with defaults
+    const overlayStyle: OverlayStyle = {
+      primaryColor: '#1a1a1a',
+      secondaryColor: '#666666',
+      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+      fontSize: 48,
         position: 'bottom',
         showMap: true,
         showStats: true,
@@ -89,11 +69,7 @@ export class OverlayController {
       res.setHeader('Content-Length', overlayBuffer.length.toString());
 
       res.send(overlayBuffer);
-    } catch (error) {
-      console.error('Custom overlay generation error:', error);
-      res.status(500).json({ error: 'Failed to generate custom overlay' });
-    }
-  }
+    });
 
   /**
    * Get available overlay templates
@@ -157,58 +133,32 @@ export class OverlayController {
   /**
    * Generate preview for a specific template
    */
-  async generateTemplatePreview(req: Request, res: Response): Promise<void> {
-    try {
-      const { templateId } = req.params;
-      const { activityData } = req.body;
+  generateTemplatePreview = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { templateId } = req.params;
+    const { activityData } = req.body as TemplatePreviewRequest;
 
-      if (!activityData) {
-        res.status(400).json({ error: 'Activity data is required' });
-        return;
-      }
-
-      // Get template style
-      const templateStyle = this.getTemplateStyle(templateId);
-      if (!templateStyle) {
-        res.status(404).json({ error: 'Template not found' });
-        return;
-      }
-
-      // Generate preview overlay
-      const overlayBuffer = await this.overlayService.generateOverlay(
-        activityData,
-        undefined, // No background image for preview
-        templateStyle
-      );
-
-      // Set response headers
-      res.setHeader('Content-Type', 'image/png');
-      res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
-      res.setHeader('Content-Length', overlayBuffer.length.toString());
-
-      res.send(overlayBuffer);
-    } catch (error) {
-      console.error('Template preview error:', error);
-      res.status(500).json({ error: 'Failed to generate template preview' });
+    // Get template style
+    const templateStyle = this.getTemplateStyle(templateId);
+    if (!templateStyle) {
+      throw ApiError.notFound('Template not found');
     }
-  }
 
-  /**
-   * Validate activity data structure
-   */
-  private validateActivityData(activityData: any): activityData is ActivityData {
-    return (
-      activityData &&
-      typeof activityData.id === 'string' &&
-      typeof activityData.name === 'string' &&
-      typeof activityData.distance === 'number' &&
-      typeof activityData.duration === 'number' &&
-      typeof activityData.elevation === 'number' &&
-      typeof activityData.pace === 'number' &&
-      Array.isArray(activityData.coordinates) &&
-      activityData.coordinates.length > 0
+    // Generate preview overlay
+    const overlayBuffer = await this.overlayService.generateOverlay(
+      activityData,
+      undefined, // No background image for preview
+      templateStyle
     );
-  }
+
+    // Set response headers
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+    res.setHeader('Content-Length', overlayBuffer.length.toString());
+
+    res.send(overlayBuffer);
+  });
+
+
 
   /**
    * Get template style by ID

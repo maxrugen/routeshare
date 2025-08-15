@@ -1,5 +1,5 @@
 import { createCanvas, loadImage, CanvasRenderingContext2D } from 'canvas';
-import { ActivityData, OverlayStyle } from '../types';
+import { ActivityData, OverlayStyle } from '../schemas/overlaySchema';
 import * as fs from 'fs';
 import * as path from 'path';
 

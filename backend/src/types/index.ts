@@ -1,4 +1,4 @@
-// Activity data types
+// Activity data types - now imported from schemas
 export interface ActivityData {
   id: string;
   name: string;

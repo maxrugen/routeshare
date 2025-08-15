@@ -1,5 +1,6 @@
 import { parseStringPromise } from 'xml2js';
-import { ActivityData, GPXData, Coordinate } from '../types';
+import { GPXData, Coordinate } from '../types';
+import { ActivityData } from '../schemas/overlaySchema';
 import * as fs from 'fs';
 
 export class GPXService {

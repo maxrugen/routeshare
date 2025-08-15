@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Activity, Loader2 } from 'lucide-react'
-import { ActivityData, StravaConnectButtonProps } from '@/types'
+import { StravaConnectButtonProps } from '@/types'
+import { api } from '@/lib/apiClient'
 
 export function StravaConnectButton({ onDataLoaded }: StravaConnectButtonProps) {
   const [isConnecting, setIsConnecting] = useState(false)
@@ -16,7 +17,7 @@ export function StravaConnectButton({ onDataLoaded }: StravaConnectButtonProps) 
     
     try {
       // Redirect to Strava OAuth
-      window.location.href = '/api/auth/strava'
+      window.location.href = api.auth.getStravaAuthUrl()
     } catch (error) {
       console.error('Failed to connect to Strava:', error)
       setIsConnecting(false)
@@ -25,12 +26,9 @@ export function StravaConnectButton({ onDataLoaded }: StravaConnectButtonProps) 
 
   const handleActivitySelect = async (activityId: number) => {
     try {
-      const response = await fetch(`/api/strava/activities/${activityId}`)
-      if (response.ok) {
-        const activityData: ActivityData = await response.json()
-        onDataLoaded(activityData)
-        setSelectedActivity(activityData)
-      }
+      // Note: This endpoint doesn't exist yet in our backend
+      // You would need to implement it or use a different approach
+      console.log('Activity selection not yet implemented')
     } catch (error) {
       console.error('Failed to fetch activity details:', error)
     }

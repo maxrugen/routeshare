@@ -5,11 +5,11 @@ const router = express.Router();
 const authController = new AuthController();
 
 // Strava OAuth routes
-router.get('/strava', (req, res) => authController.initiateStravaAuth(req, res));
-router.get('/strava/callback', (req, res) => authController.handleStravaCallback(req, res));
+router.get('/strava', authController.initiateStravaAuth);
+router.get('/strava/callback', authController.handleStravaCallback);
 
 // Profile and session management
-router.get('/profile', (req, res) => authController.getStravaProfile(req, res));
-router.post('/logout', (req, res) => authController.logout(req, res));
+router.get('/profile', authController.getStravaProfile);
+router.post('/logout', authController.logout);
 
 export default router;

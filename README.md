@@ -255,7 +255,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Issues**: [GitHub Issues](https://github.com/maxrugen/routeshare/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/maxrugen/routeshare/discussions)
-- **Email**: support@routeshare.com
+- **Email**: hi@maxrugen.com
 
 ---
 

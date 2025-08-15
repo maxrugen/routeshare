@@ -13,6 +13,7 @@
     "@types/react-color": "^3.0.13",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.4",
+    "html-to-image": "^1.11.13",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.292.0",
     "mapbox-gl": "^2.15.0",

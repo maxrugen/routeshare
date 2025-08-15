@@ -84,7 +84,7 @@ REDIRECT_URI=http://localhost:3000/api/auth/strava/callback
 
 ```env
 # Server Configuration
-PORT=5000
+PORT=5001
 NODE_ENV=development
 
 # Strava API Configuration

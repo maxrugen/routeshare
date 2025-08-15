@@ -35,14 +35,16 @@ export const overlayStyleSchema = z.object({
 // Overlay generation request schema
 export const overlayRequestSchema = z.object({
   activityData: activityDataSchema,
-  backgroundImage: z.string().url().optional(),
+  // KORRIGIERT: .nullable() hinzugefügt, um `null` als gültigen Wert zu erlauben
+  backgroundImage: z.string().url().nullable().optional(),
   overlayStyle: overlayStyleSchema.optional(),
 });
 
 // Custom overlay request schema
 export const customOverlayRequestSchema = z.object({
   activityData: activityDataSchema,
-  backgroundImage: z.string().url().optional(),
+  // KORRIGIERT: .nullable() hinzugefügt, um `null` als gültigen Wert zu erlauben
+  backgroundImage: z.string().url().nullable().optional(),
   customStyle: overlayStyleSchema.partial(),
 });
 

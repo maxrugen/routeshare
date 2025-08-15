@@ -1,5 +1,5 @@
 // API Client for Routeshare backend
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
 
 // Custom error class for API errors
 export class ApiError extends Error {

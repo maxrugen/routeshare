@@ -10,6 +10,7 @@ import { OverlayPreview } from '@/components/OverlayPreview'
 import { ActivityStats } from '@/components/ActivityStats'
 import { RouteMap } from '@/components/RouteMap'
 import { useOverlayState } from '@/hooks/useOverlayState'
+import { SketchPicker, ColorResult } from 'react-color' // NEUER IMPORT
 
 export default function DashboardPage() {
   const searchParams = useSearchParams()
@@ -251,15 +252,19 @@ export default function DashboardPage() {
                   Customize Style
                 </h3>
                 <div className="space-y-4">
+                  
+                  {/* ERSETZTER FARBWÄHLER */}
                   <div>
                     <label className="block text-sm font-medium text-primary-700 mb-2">
                       Primary Color
                     </label>
-                    <input
-                      type="color"
-                      value={overlayStyle.primaryColor}
-                      onChange={(e) => handleStyleChange({ primaryColor: e.target.value })}
-                      className="w-full h-10 rounded-lg border border-primary-200"
+                    <SketchPicker
+                      color={overlayStyle.primaryColor}
+                      onChangeComplete={(color: ColorResult) => handleStyleChange({ primaryColor: color.hex })}
+                      // Optional: Disable alpha if you don't need transparency
+                      disableAlpha={true} 
+                      // Optional: Use a preset of colors
+                      presetColors={['#FFFFFF', '#000000', '#FF5733', '#33FF57', '#3357FF']}
                     />
                   </div>
                   

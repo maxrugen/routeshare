@@ -27,7 +27,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Create stunning Instagram Story overlays from your Strava activities or GPX files. 
+              Create stunning Instagram Story overlays from your GPX files. 
               Beautiful, minimal designs that showcase your achievements.
             </motion.p>
             
@@ -73,7 +73,7 @@ export default function HomePage() {
                 Import Activities
               </h3>
               <p className="text-primary-600">
-                Connect with Strava or upload GPX files to import your activity data
+                Upload GPX files to import your activity data
               </p>
             </motion.div>
             
@@ -88,10 +88,10 @@ export default function HomePage() {
                 <Camera className="w-8 h-8 text-accent-600" />
               </div>
               <h3 className="text-xl font-semibold text-primary-900 mb-2">
-                Custom Overlays
+                Clean Overlays
               </h3>
               <p className="text-primary-600">
-                Choose from beautiful templates or create your own custom design
+                Generate a minimal overlay with stats and route map; export light or dark variants
               </p>
             </motion.div>
             

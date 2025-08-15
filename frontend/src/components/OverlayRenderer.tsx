@@ -332,7 +332,7 @@ export function OverlayRenderer({
 
       {/* Canvas Info */}
       <div className="text-center text-sm text-primary-500">
-        <p>Canvas: 1080 × 1920 (Instagram Story format)</p>
+        <p>Export: Transparent PNG sized to content</p>
         <p>Real-time preview with custom styling</p>
       </div>
     </motion.div>

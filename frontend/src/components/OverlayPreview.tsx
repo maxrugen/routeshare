@@ -55,7 +55,7 @@ export function OverlayPreview({ overlayUrl }: OverlayPreviewProps) {
             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-white text-center">
               <Instagram className="w-8 h-8 mx-auto mb-2" />
               <p className="text-sm font-medium">Instagram Story Ready</p>
-              <p className="text-xs opacity-80">1080 × 1920</p>
+              <p className="text-xs opacity-80">Auto-sized PNG</p>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ export function OverlayPreview({ overlayUrl }: OverlayPreviewProps) {
       <div className="grid grid-cols-2 gap-4 text-sm">
         <div className="text-center p-3 bg-primary-50 rounded-lg">
           <p className="text-primary-600">Dimensions</p>
-          <p className="font-medium text-primary-900">1080 × 1920</p>
+          <p className="font-medium text-primary-900">Auto-sized</p>
         </div>
         <div className="text-center p-3 bg-primary-50 rounded-lg">
           <p className="text-primary-600">Format</p>

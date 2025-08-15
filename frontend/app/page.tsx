@@ -109,7 +109,7 @@ export default function HomePage() {
                 Export & Share
               </h3>
               <p className="text-primary-600">
-                Download your overlay in Instagram Story format (1080x1920)
+                Download your Instagram-ready overlays
               </p>
             </motion.div>
           </div>

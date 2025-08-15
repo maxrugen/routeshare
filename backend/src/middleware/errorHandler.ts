@@ -7,7 +7,7 @@ export interface ErrorResponse {
   statusCode: number;
   timestamp: string;
   path: string;
-  ...(process.env.NODE_ENV === 'development' && { stack?: string });
+  stack?: string;
 }
 
 export const errorHandler = (

@@ -1,7 +1,7 @@
 // Simple test script to verify the refactored backend
 const axios = require('axios');
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'http://localhost:5001';
 
 async function testBackend() {
   console.log('🧪 Testing refactored Routeshare backend...\n');

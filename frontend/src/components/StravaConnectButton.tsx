@@ -1,16 +1,40 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Activity, Loader2 } from 'lucide-react'
 import { StravaConnectButtonProps } from '../../types'
 import { api } from '../lib/apiClient'
+import { useSearchParams } from 'next/navigation'
 
 export function StravaConnectButton({ onDataLoaded }: StravaConnectButtonProps) {
   const [isConnecting, setIsConnecting] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
   const [activities, setActivities] = useState<any[]>([])
   const [selectedActivity, setSelectedActivity] = useState<any>(null)
+  const searchParams = useSearchParams()
+
+  // Detect return from Strava and/or existing session
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const profile = await api.auth.getProfile()
+        if (profile?.isAuthenticated) {
+          setIsConnected(true)
+        }
+      } catch (_) {
+        setIsConnected(false)
+      }
+    }
+
+    // Trigger on mount and when ?auth=success is present
+    const authStatus = searchParams.get('auth')
+    if (authStatus === 'success') {
+      checkAuth()
+    } else {
+      checkAuth()
+    }
+  }, [searchParams])
 
   const handleStravaConnect = async () => {
     setIsConnecting(true)

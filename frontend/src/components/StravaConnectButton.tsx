@@ -23,7 +23,7 @@ export function StravaConnectButton({ onDataLoaded: _onDataLoaded }: StravaConne
   }
 
   return (
-    <div className="relative space-y-2">
+    <div className="relative space-y-2 flex flex-col items-center">
       <motion.button
         onClick={handleClick}
         className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 flex items-center justify-center gap-2"
@@ -36,19 +36,21 @@ export function StravaConnectButton({ onDataLoaded: _onDataLoaded }: StravaConne
       </motion.button>
 
       {showTooltip && (
-        <motion.div
+        <div
           id="strava-coming-soon"
-          initial={{ opacity: 0, y: -4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.15 }}
-          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-20"
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-20 pointer-events-none"
           role="status"
           aria-live="polite"
         >
-          <div className="bg-primary-900 text-white text-sm px-3 py-2 rounded-md shadow-lg">
+          <motion.div
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.15 }}
+            className="bg-primary-900 text-white text-sm px-3 py-2 rounded-md shadow-lg"
+          >
             Strava integration is currently unavailable. Coming soon!
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       )}
 
       <p className="text-xs text-primary-500 text-center">
@@ -57,3 +59,4 @@ export function StravaConnectButton({ onDataLoaded: _onDataLoaded }: StravaConne
     </div>
   )
 }
+

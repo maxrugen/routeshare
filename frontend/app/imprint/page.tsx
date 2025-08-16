@@ -8,8 +8,8 @@ export default function ImprintPage() {
       </p>
       <div className="mt-6 space-y-2 text-gray-700">
         <p><span className="font-medium">Company:</span> Routeshare</p>
-        <p><span className="font-medium">Address:</span> [Your Address]</p>
-        <p><span className="font-medium">Responsible Person:</span> [Name]</p>
+        <p><span className="font-medium">Address:</span> on request</p>
+        <p><span className="font-medium">Responsible Person:</span> Max Rugen</p>
         <p><span className="font-medium">Email:</span> hi@maxrugen.com</p>
       </div>
     </div>

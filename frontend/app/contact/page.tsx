@@ -9,7 +9,7 @@ export default function ContactPage() {
       <div className="mt-6 space-y-2 text-gray-700">
         <p><span className="font-medium">Email:</span> hi@maxrugen.com</p>
         <p><span className="font-medium">Address:</span> [Your Address]</p>
-        <p><span className="font-medium">Support Hours:</span> Mon–Fri, 9:00–17:00</p>
+        <p><span className="font-medium">GitHub:</span> <a href="https://github.com/maxrugen/routeshare" className="text-blue-600 underline hover:text-blue-700" target="_blank" rel="noopener noreferrer">https://github.com/maxrugen/routeshare</a></p>
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ A streamlined MVP application that generates beautiful Instagram Story overlays 
 
 ## ✨ Features
 
-- **📱 Smart Sizing**: Exports transparent PNGs sized to fit your content
+- **📱 Instagram Story Ready**: Exports transparent PNGs sized to fit your content
 - **📁 GPX File Support**: Upload and parse GPX files with full coordinate processing
 - **📊 Activity Stats**: Display distance, duration, elevation, and pace
 - **💾 Export Options**: Download as PNG with white/black color variants

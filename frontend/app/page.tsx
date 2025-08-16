@@ -91,7 +91,7 @@ export default function HomePage() {
                 Clean Overlays
               </h3>
               <p className="text-primary-600">
-                Generate a minimal overlay with stats and route map; export light or dark variants
+                Generate a minimal overlay with stats and map; export light or dark variants
               </p>
             </motion.div>
             

@@ -55,9 +55,6 @@ export const Overlay = React.forwardRef<HTMLDivElement, OverlayProps>(
 
     const mapPath = getMapPath(activityData.coordinates, 800, 450);
 
-    const distanceKm = activityData.distance / 1000;
-    const distanceDisplay = distanceKm.toFixed(1);
-
     return (
       <div
         ref={ref}
@@ -76,7 +73,7 @@ export const Overlay = React.forwardRef<HTMLDivElement, OverlayProps>(
           {overlayStyle.showStats && (
             <div className="w-full text-center" style={{ display: 'flex', justifyContent: 'space-between', borderTop: `4px solid ${overlayStyle.secondaryColor}`, paddingTop: '32px' }}>
               <div style={{ flex: 1 }}>
-                <p style={{ fontSize: '96px', fontWeight: 'bold', lineHeight: 1 }}>{distanceDisplay}</p>
+                <p style={{ fontSize: '96px', fontWeight: 'bold', lineHeight: 1 }}>{(activityData.distance / 1000).toFixed(1)}</p>
                 <p style={{ fontSize: '36px', color: overlayStyle.secondaryColor, marginTop: '8px' }}>Kilometers</p>
               </div>
               <div style={{ flex: 1 }}>

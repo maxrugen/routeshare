@@ -42,7 +42,7 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
   return (
     <div className="text-center">
       <div
-        {...getRootProps()}
+        {...getRootProps({ role: 'button', 'aria-label': 'Upload GPX file', tabIndex: 0 })}
         className={`relative border-2 border-dashed rounded-lg cursor-pointer transition-colors duration-200 
                     ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-primary-300 hover:border-blue-400'}
                     px-6 py-10`}

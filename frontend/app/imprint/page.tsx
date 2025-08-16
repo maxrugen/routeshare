@@ -1,3 +1,22 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Imprint – Routeshare',
+  description: 'Legal information and responsible contact for Routeshare.',
+  openGraph: {
+    title: 'Imprint – Routeshare',
+    description: 'Legal information and responsible contact for Routeshare.',
+    images: ['/og-default.svg'],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Imprint – Routeshare',
+    description: 'Legal information and responsible contact for Routeshare.',
+    images: ['/og-default.svg'],
+  },
+}
+
 export default function ImprintPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">

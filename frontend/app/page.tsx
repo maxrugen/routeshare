@@ -37,7 +37,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Link href="/dashboard" className="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3">
+              <Link href="/dashboard" className="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 rounded" aria-label="Get started and open dashboard">
                 Get Started
                 <ArrowRight className="w-5 h-5" />
               </Link>

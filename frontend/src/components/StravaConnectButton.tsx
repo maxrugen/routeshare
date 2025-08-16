@@ -29,6 +29,7 @@ export function StravaConnectButton({ onDataLoaded: _onDataLoaded }: StravaConne
         className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 flex items-center justify-center gap-2"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        aria-label="Connect with Strava (coming soon)"
         aria-describedby={showTooltip ? 'strava-coming-soon' : undefined}
       >
         <Activity className="w-5 h-5" />

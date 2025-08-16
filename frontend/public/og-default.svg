@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g fill="#1e3a8a">
+    <text x="60" y="140" font-size="72" font-family="Inter, system-ui, -apple-system, Arial" font-weight="700">Routeshare</text>
+    <text x="60" y="210" font-size="28" font-family="Inter, system-ui, -apple-system, Arial" opacity="0.8">Create Instagram Story overlays from your GPX activities</text>
+  </g>
+  <g transform="translate(60,280)">
+    <rect x="0" y="0" width="1080" height="260" rx="16" fill="#ffffff" stroke="#93c5fd" stroke-width="2"/>
+    <path d="M40 200 L200 80 L360 180 L520 60 L680 140 L840 100 L1000 160" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
+
+

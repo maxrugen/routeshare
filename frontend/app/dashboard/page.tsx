@@ -84,7 +84,8 @@ function DashboardContent() {
                             <button 
                                 onClick={() => handleExport('white')} 
                                 disabled={!!exportingColor}
-                                className="btn-secondary flex items-center justify-center gap-2 py-3 disabled:opacity-50"
+                                className="btn-secondary flex items-center justify-center gap-2 py-3 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 rounded"
+                                aria-label="Download white overlay as PNG"
                             >
                                 {exportingColor === 'white' ? <div className="w-5 h-5 border-2 border-primary-300 border-t-primary-600 rounded-full animate-spin"></div> : <Download className="w-5 h-5"/>}
                                 White Overlay
@@ -93,7 +94,8 @@ function DashboardContent() {
                             <button 
                                 onClick={() => handleExport('black')} 
                                 disabled={!!exportingColor}
-                                className="btn-secondary flex items-center justify-center gap-2 py-3 disabled:opacity-50"
+                                className="btn-secondary flex items-center justify-center gap-2 py-3 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 rounded"
+                                aria-label="Download black overlay as PNG"
                             >
                                 {exportingColor === 'black' ? <div className="w-5 h-5 border-2 border-primary-300 border-t-primary-600 rounded-full animate-spin"></div> : <Download className="w-5 h-5"/>}
                                 Black Overlay

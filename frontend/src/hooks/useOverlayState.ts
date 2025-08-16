@@ -11,6 +11,9 @@ interface OverlayStyle {
   position: 'top' | 'center' | 'bottom';
   showMap: boolean;
   showStats: boolean;
+  variant?: 'minimal' | 'card';
+  unit?: 'km' | 'mi';
+  locationText?: string;
 }
 
 // State interface
@@ -43,6 +46,9 @@ const defaultOverlayStyle: OverlayStyle = {
   position: 'bottom',
   showMap: true,
   showStats: true,
+  variant: 'minimal',
+  unit: 'km',
+  locationText: '',
 };
 
 export function useOverlayState(): OverlayState & OverlayActions {

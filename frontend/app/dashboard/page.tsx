@@ -75,6 +75,26 @@ function DashboardContent() {
                 ) : (
                     <>
                         <h2 className="text-xl font-semibold text-primary-900 mb-4">2. Export Your Overlay</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                          <div className="card">
+                            <label className="block text-sm font-medium text-primary-700 mb-2">Variant</label>
+                            <div className="flex gap-2">
+                              <button onClick={() => updateOverlayStyle({ variant: 'minimal' })} className="btn-secondary flex-1 py-2">Minimal</button>
+                              <button onClick={() => updateOverlayStyle({ variant: 'card' })} className="btn-secondary flex-1 py-2">Card</button>
+                            </div>
+                          </div>
+                          <div className="card">
+                            <label className="block text-sm font-medium text-primary-700 mb-2">Units</label>
+                            <div className="flex gap-2">
+                              <button onClick={() => updateOverlayStyle({ unit: 'km' as any })} className="btn-secondary flex-1 py-2">km</button>
+                              <button onClick={() => updateOverlayStyle({ unit: 'mi' as any })} className="btn-secondary flex-1 py-2">mi</button>
+                            </div>
+                          </div>
+                          <div className="card">
+                            <label className="block text-sm font-medium text-primary-700 mb-2">Location (optional)</label>
+                            <input onChange={(e) => updateOverlayStyle({ locationText: e.target.value })} placeholder="e.g., Hilton Head Island, SC" className="input-field" />
+                          </div>
+                        </div>
                         <div className="p-4 bg-green-50 text-green-800 rounded-lg text-center mb-6">
                             <p>GPX file processed successfully!</p>
                         </div>

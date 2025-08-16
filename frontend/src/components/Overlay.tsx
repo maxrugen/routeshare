@@ -75,28 +75,28 @@ export const Overlay = React.forwardRef<HTMLDivElement, OverlayProps>(
       >
         <div className="w-full">
           {overlayStyle.variant === 'card' ? (
-            <div className="w-full rounded-3xl border-8 border-black/80 bg-white text-black p-10" style={{boxShadow: '0 6px 0 0 #000'}}>
+            <div className="w-full rounded-3xl border-8 border-black/80 bg-white text-black p-6 md:p-8 lg:p-10" style={{boxShadow: '0 6px 0 0 #000'}}>
               {/* Header */}
-              <div className="flex items-start justify-between mb-6">
+              <div className="flex items-start justify-between mb-4 md:mb-6">
                 <div className="leading-none">
-                  <div style={{ fontSize: 96, fontWeight: 800, lineHeight: 1 }}>{distanceDisplay} <span style={{fontSize: 48, fontWeight: 700}}>{unitLabel}</span></div>
-                  <div style={{ color: '#6b7280', marginTop: 6, fontSize: 28 }}>pace — time</div>
+                  <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1 }} className="md:text-[96px]">{distanceDisplay} <span style={{fontSize: 40, fontWeight: 700}} className="md:text-[48px]">{unitLabel}</span></div>
+                  <div style={{ color: '#6b7280', marginTop: 6, fontSize: 22 }} className="md:text-[28px]">pace — time</div>
                 </div>
                 <div className="text-right" style={{ color: '#111827'}}>
-                  <div style={{ fontSize: 28, fontWeight: 600 }}>{new Date(activityData.startTime).toLocaleString()}</div>
+                  <div style={{ fontSize: 22, fontWeight: 600 }} className="md:text-[28px]">{new Date(activityData.startTime).toLocaleString()}</div>
                   {overlayStyle.locationText && (
-                    <div style={{ fontSize: 24, color: '#6b7280'}}>{overlayStyle.locationText}</div>
+                    <div style={{ fontSize: 20, color: '#6b7280'}} className="md:text-[24px]">{overlayStyle.locationText}</div>
                   )}
                 </div>
               </div>
 
               {/* Map panel */}
               {mapPath && (
-                <div className="rounded-2xl border-8" style={{borderColor: '#111827', background: '#e5e7eb', padding: 16}}>
+                <div className="rounded-2xl border-8" style={{borderColor: '#111827', background: '#e5e7eb', padding: 12}}>
                   <svg width="100%" viewBox="0 0 800 450">
-                    <path d={mapPath} fill="none" stroke="#111827" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d={mapPath} fill="none" stroke="#111827" strokeWidth="10" className="md:stroke-[14]" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <div style={{ color: '#6b7280', fontSize: 20, marginTop: 4 }}>Maps</div>
+                  <div style={{ color: '#6b7280', fontSize: 16, marginTop: 4 }} className="md:text-[20px]">Maps</div>
                 </div>
               )}
             </div>

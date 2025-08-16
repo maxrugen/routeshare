@@ -47,18 +47,18 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-12 md:py-20 bg-white">
+      <section className="py-8 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-900 mb-4">
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="text-2xl md:text-4xl font-bold text-primary-900 mb-2 md:mb-4">
               Everything You Need
             </h2>
-            <p className="text-xl text-primary-600 max-w-2xl mx-auto">
+            <p className="text-base md:text-xl text-primary-600 max-w-2xl mx-auto leading-relaxed">
               From data import to beautiful overlays, we've got you covered
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             <motion.div 
               className="text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -66,13 +66,13 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-accent-600" />
+              <div className="w-10 h-10 md:w-16 md:h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                <MapPin className="w-5 h-5 md:w-8 md:h-8 text-accent-600" />
               </div>
-              <h3 className="text-xl font-semibold text-primary-900 mb-2">
+              <h3 className="text-lg md:text-xl font-semibold text-primary-900 mb-1 md:mb-2">
                 Import Activities
               </h3>
-              <p className="text-primary-600">
+              <p className="text-primary-500 md:text-primary-600 text-sm md:text-base">
                 Upload GPX files to import your activity data
               </p>
             </motion.div>
@@ -84,13 +84,13 @@ export default function HomePage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Camera className="w-8 h-8 text-accent-600" />
+              <div className="w-10 h-10 md:w-16 md:h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                <Camera className="w-5 h-5 md:w-8 md:h-8 text-accent-600" />
               </div>
-              <h3 className="text-xl font-semibold text-primary-900 mb-2">
+              <h3 className="text-lg md:text-xl font-semibold text-primary-900 mb-1 md:mb-2">
                 Clean Overlays
               </h3>
-              <p className="text-primary-600">
+              <p className="text-primary-500 md:text-primary-600 text-sm md:text-base">
                 Generate a minimal overlay with stats and map; export light or dark variants
               </p>
             </motion.div>
@@ -102,13 +102,13 @@ export default function HomePage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <div className="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Download className="w-8 h-8 text-accent-600" />
+              <div className="w-10 h-10 md:w-16 md:h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                <Download className="w-5 h-5 md:w-8 md:h-8 text-accent-600" />
               </div>
-              <h3 className="text-xl font-semibold text-primary-900 mb-2">
+              <h3 className="text-lg md:text-xl font-semibold text-primary-900 mb-1 md:mb-2">
                 Export & Share
               </h3>
-              <p className="text-primary-600">
+              <p className="text-primary-500 md:text-primary-600 text-sm md:text-base">
                 Download your Instagram-ready overlays
               </p>
             </motion.div>
